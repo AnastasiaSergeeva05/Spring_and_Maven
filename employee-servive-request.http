@@ -1,0 +1,46 @@
+###Получим всех содрудников
+GET http://localhost:8080/employees
+###Создать содрудника
+POST http://localhost:8080/employees
+Content-Type: application/json
+
+{
+  "firstName": "Test",
+  "lastName": "Test",
+  "departament": 1,
+  "salary": 10000
+
+}
+###Создать содрудника2
+POST http://localhost:8080/employees
+Content-Type: application/json
+
+{
+  "firstName": "Test1",
+  "lastName": "Test1",
+  "departament": 2,
+  "salary": 20000
+
+}
+###Создать содрудника3
+POST http://localhost:8080/employees
+Content-Type: application/json
+
+{
+  "firstName": "Test2",
+  "lastName": "Test2",
+  "departament": 2,
+  "salary": 50000
+
+}
+###Сумма Затрат
+GET http://localhost:8080/employees/salary/sum
+
+### Миниимальная зарплата
+GET http://localhost:8080/employees/min/salary
+
+### Максимальная зарплата
+GET http://localhost:8080/employees/max/salary
+
+###Среденя зарплата
+GET http://localhost:8080/employees/highSalary
