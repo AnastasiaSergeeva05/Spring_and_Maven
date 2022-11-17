@@ -42,5 +42,5 @@ GET http://localhost:8080/employees/min/salary
 ### Максимальная зарплата
 GET http://localhost:8080/employees/max/salary
 
-###Среденя зарплата
+###Среденяя зарплата
 GET http://localhost:8080/employees/highSalary
