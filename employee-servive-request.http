@@ -8,7 +8,7 @@ Content-Type: application/json
   "firstName": "Test",
   "lastName": "Test",
   "departament": 1,
-  "salary": 10000
+  "salary": 80000
 
 }
 ###Создать содрудника2
@@ -16,9 +16,9 @@ POST http://localhost:8080/employees
 Content-Type: application/json
 
 {
-  "firstName": "Test1",
-  "lastName": "Test1",
-  "departament": 2,
+  "firstName": "Testos",
+  "lastName": "Testos",
+  "departament": 1,
   "salary": 20000
 
 }
@@ -27,10 +27,44 @@ POST http://localhost:8080/employees
 Content-Type: application/json
 
 {
-  "firstName": "Test2",
-  "lastName": "Test2",
+  "firstName": "Testik",
+  "lastName": "Testik",
   "departament": 2,
   "salary": 50000
+
+}
+
+###Создать содрудника4
+POST http://localhost:8080/employees
+Content-Type: application/json
+
+{
+  "firstName": "Testikq",
+  "lastName": "Testiwk",
+  "departament": 2,
+  "salary": 70000
+
+}
+###Создать содрудника5
+POST http://localhost:8080/employees
+Content-Type: application/json
+
+{
+  "firstName": "Tesqtik",
+  "lastName": "Testwik",
+  "departament": 1,
+  "salary": 55000
+
+}
+###Создать содрудника6
+POST http://localhost:8080/employees
+Content-Type: application/json
+
+{
+  "firstName": "Testtik",
+  "lastName": "Testtik",
+  "departament": 1,
+  "salary": 70000
 
 }
 ###Сумма Затрат

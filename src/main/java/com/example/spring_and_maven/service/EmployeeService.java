@@ -3,11 +3,9 @@ package com.example.spring_and_maven.service;
 import com.example.spring_and_maven.exception.EmployeeNotFoundException;
 import com.example.spring_and_maven.exception.InvalidEmployeeRequstException;
 import com.example.spring_and_maven.model.Employee;
-
 import com.example.spring_and_maven.record.EmployeeRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StreamUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -23,7 +21,7 @@ public class EmployeeService {
     }
 
 
-    public Employee addEmployees(EmployeeRequest employeeRequest) {
+    public Employee addEmployee(EmployeeRequest employeeRequest) {
         if (!StringUtils.isAlpha(employeeRequest.getFirstName()) ||
         !StringUtils.isAlpha(employeeRequest.getLastName())) {
             throw new InvalidEmployeeRequstException();
@@ -51,14 +49,20 @@ public class EmployeeService {
                 orElseThrow(EmployeeNotFoundException::new);
     }
 
-    public Double getEmployeeWithSalaryMoreThatAverage() {
+    public List<Employee>getEmployeeWithMaxSalaryAverage(){
         Double averageSalary = getAverageSalary();
-
-        return averageSalary;
+        if(averageSalary == null){
+            return Collections.emptyList();
+    }
+        return employees.values().stream().filter(e ->e.getSalary()>averageSalary).collect(Collectors.toList());
     }
 
 
     public Double getAverageSalary() {
         return employees.values().stream().collect(Collectors.averagingInt(Employee::getSalary));
+    }
+
+    public Employee removeEmployee(int id){
+        return employees.remove(id);
     }
 }

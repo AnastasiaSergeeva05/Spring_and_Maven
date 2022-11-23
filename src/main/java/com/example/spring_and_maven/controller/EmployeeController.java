@@ -4,17 +4,10 @@ import com.example.spring_and_maven.exception.InvalidEmployeeRequstException;
 import com.example.spring_and_maven.model.Employee;
 import com.example.spring_and_maven.record.EmployeeRequest;
 import com.example.spring_and_maven.service.EmployeeService;
-
-import org.apache.catalina.connector.Response;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import java.util.List;
 
 @RestController
 public class EmployeeController {
@@ -34,7 +27,7 @@ public class EmployeeController {
     @PostMapping("/employees")
     public ResponseEntity<Employee> createEmployees(@RequestBody EmployeeRequest employeeRequest) {
         try {
-            return ResponseEntity.ok( this.employeeService.addEmployees(employeeRequest));
+            return ResponseEntity.ok( this.employeeService.addEmployee(employeeRequest));
         } catch (InvalidEmployeeRequstException e) {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().build();
