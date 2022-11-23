@@ -1,9 +1,10 @@
 package com.example.spring_and_maven.service;
 
 import com.example.spring_and_maven.exception.EmployeeNotFoundException;
+import com.example.spring_and_maven.exception.InvalidEmployeeRequstException;
 import com.example.spring_and_maven.model.Employee;
-
 import com.example.spring_and_maven.record.EmployeeRequest;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -20,12 +21,14 @@ public class EmployeeService {
     }
 
 
-    public Employee getEmployees(EmployeeRequest employeeRequest) {
-        if (employeeRequest.getFirstName() == null || employeeRequest.getLastName() == null) {
-            throw new IllegalArgumentException("Ошибка: ");
+    public Employee addEmployee(EmployeeRequest employeeRequest) {
+        if (!StringUtils.isAlpha(employeeRequest.getFirstName()) ||
+        !StringUtils.isAlpha(employeeRequest.getLastName())) {
+            throw new InvalidEmployeeRequstException();
         }
-        Employee employee = new Employee(employeeRequest.getFirstName(),
-                employeeRequest.getLastName(),
+        Employee employee = new Employee(
+                StringUtils.capitalize(employeeRequest.getFirstName()),
+               StringUtils.capitalize(employeeRequest.getFirstName()),
                 employeeRequest.getDepartment(),
                 employeeRequest.getSalary());
         this.employees.put(employee.getId(), employee);
@@ -46,16 +49,20 @@ public class EmployeeService {
                 orElseThrow(EmployeeNotFoundException::new);
     }
 
-    public List<Employee> getEmployeeWithSalaryMoreThatAverage() {
+    public List<Employee>getEmployeeWithMaxSalaryAverage(){
         Double averageSalary = getAverageSalary();
-        if (averageSalary == null) {
+        if(averageSalary == null){
             return Collections.emptyList();
-        }
-        return employees.values().stream().filter(e -> e.getSalary() > averageSalary).collect(Collectors.toList());
+    }
+        return employees.values().stream().filter(e ->e.getSalary()>averageSalary).collect(Collectors.toList());
     }
 
 
     public Double getAverageSalary() {
         return employees.values().stream().collect(Collectors.averagingInt(Employee::getSalary));
+    }
+
+    public Employee removeEmployee(int id){
+        return employees.remove(id);
     }
 }
